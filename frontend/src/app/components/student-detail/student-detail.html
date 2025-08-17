@@ -1,0 +1,76 @@
+<div class="student-detail-container">
+  <header class="page-header">
+    <div class="header-content">
+      <h1>Student Details</h1>
+      <div class="header-actions">
+        <a routerLink="/students" class="btn btn-outline">← Back to Students</a>
+        <a [routerLink]="['/students', student.id, 'edit']" class="btn btn-secondary" *ngIf="student">Edit</a>
+        <button (click)="deleteStudent()" class="btn btn-danger" *ngIf="student">Delete</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-content">
+    <div class="loading" *ngIf="isLoading">
+      <p>Loading student details...</p>
+    </div>
+
+    <div class="error-message" *ngIf="errorMessage && !isLoading">
+      {{ errorMessage }}
+    </div>
+
+    <div class="student-details-card" *ngIf="student && !isLoading">
+      <div class="student-header">
+        <div class="student-avatar">
+          {{ student.first_name.charAt(0) }}{{ student.last_name.charAt(0) }}
+        </div>
+        <div class="student-title">
+          <h2>{{ student.first_name }} {{ student.last_name }}</h2>
+          <p class="student-id">Student ID: {{ student.student_id }}</p>
+        </div>
+      </div>
+
+      <div class="student-info-grid">
+        <div class="info-section">
+          <h3>Personal Information</h3>
+          <div class="info-item">
+            <label>Email:</label>
+            <span>{{ student.email }}</span>
+          </div>
+          <div class="info-item">
+            <label>Date of Birth:</label>
+            <span>{{ formatDate(student.date_of_birth) }}</span>
+          </div>
+        </div>
+
+        <div class="info-section">
+          <h3>Academic Information</h3>
+          <div class="info-item">
+            <label>Major:</label>
+            <span>{{ student.major }}</span>
+          </div>
+          <div class="info-item">
+            <label>Year:</label>
+            <span>{{ student.year }}</span>
+          </div>
+          <div class="info-item" *ngIf="student.gpa">
+            <label>GPA:</label>
+            <span>{{ student.gpa }}</span>
+          </div>
+        </div>
+
+        <div class="info-section" *ngIf="student.created_at">
+          <h3>Record Information</h3>
+          <div class="info-item">
+            <label>Created:</label>
+            <span>{{ formatDate(student.created_at) }}</span>
+          </div>
+          <div class="info-item" *ngIf="student.updated_at">
+            <label>Last Updated:</label>
+            <span>{{ formatDate(student.updated_at) }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

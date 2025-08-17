@@ -1,0 +1,60 @@
+<div class="student-list-container">
+  <header class="page-header">
+    <div class="header-content">
+      <h1>Students</h1>
+      <div class="header-actions">
+        <a routerLink="/dashboard" class="btn btn-outline">← Back to Dashboard</a>
+        <a routerLink="/students/new" class="btn btn-primary">Add New Student</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-content">
+    <div class="loading" *ngIf="isLoading">
+      <p>Loading students...</p>
+    </div>
+
+    <div class="error-message" *ngIf="errorMessage && !isLoading">
+      {{ errorMessage }}
+    </div>
+
+    <div class="students-table-container" *ngIf="!isLoading && !errorMessage">
+      <table class="students-table" *ngIf="students.length > 0">
+        <thead>
+          <tr>
+            <th>Student ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Major</th>
+            <th>Year</th>
+            <th>GPA</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of students">
+            <td>{{ student.student_id }}</td>
+            <td>{{ student.first_name }} {{ student.last_name }}</td>
+            <td>{{ student.email }}</td>
+            <td>{{ student.major }}</td>
+            <td>{{ student.year }}</td>
+            <td>{{ student.gpa || 'N/A' }}</td>
+            <td>
+              <div class="action-buttons">
+                <a [routerLink]="['/students', student.id]" class="btn btn-small btn-info">View</a>
+                <a [routerLink]="['/students', student.id, 'edit']" class="btn btn-small btn-secondary">Edit</a>
+                <button (click)="deleteStudent(student.id!)" class="btn btn-small btn-danger">Delete</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="empty-state" *ngIf="students.length === 0">
+        <h2>No Students Found</h2>
+        <p>Get started by adding your first student.</p>
+        <a routerLink="/students/new" class="btn btn-primary">Add First Student</a>
+      </div>
+    </div>
+  </main>
+</div>
