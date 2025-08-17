@@ -1,1 +1,56 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <div class="header-content">
+      <h1>Student Management Dashboard</h1>
+      <div class="user-info">
+        <span *ngIf="user">Welcome, {{ user.first_name }} {{ user.last_name }}</span>
+        <button class="btn btn-outline" (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="dashboard-content">
+    <div class="dashboard-stats" *ngIf="!isLoading">
+      <div class="stat-card">
+        <div class="stat-number">{{ studentsCount }}</div>
+        <div class="stat-label">Total Students</div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-number">{{ recentStudents.length }}</div>
+        <div class="stat-label">Recent Entries</div>
+      </div>
+    </div>
+
+    <div class="dashboard-actions">
+      <a routerLink="/students" class="btn btn-primary">View All Students</a>
+      <a routerLink="/students/new" class="btn btn-secondary">Add New Student</a>
+    </div>
+
+    <div class="recent-students" *ngIf="!isLoading && recentStudents.length > 0">
+      <h2>Recent Students</h2>
+      <div class="students-grid">
+        <div class="student-card" *ngFor="let student of recentStudents">
+          <div class="student-info">
+            <h3>{{ student.first_name }} {{ student.last_name }}</h3>
+            <p class="student-details">{{ student.major }} • {{ student.year }}</p>
+            <p class="student-id">ID: {{ student.student_id }}</p>
+          </div>
+          <div class="student-actions">
+            <a [routerLink]="['/students', student.id]" class="btn btn-small">View</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="loading" *ngIf="isLoading">
+      <p>Loading dashboard...</p>
+    </div>
+
+    <div class="empty-state" *ngIf="!isLoading && recentStudents.length === 0">
+      <h2>No Students Found</h2>
+      <p>Get started by adding your first student.</p>
+      <a routerLink="/students/new" class="btn btn-primary">Add First Student</a>
+    </div>
+  </main>
+</div>

@@ -1,9 +1,9 @@
-.dashboard-container {
+.student-list-container {
   min-height: 100vh;
   background-color: #f5f5f5;
 }
 
-.dashboard-header {
+.page-header {
   background: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 1rem 0;
@@ -24,88 +24,49 @@
   font-size: 1.5rem;
 }
 
-.user-info {
+.header-actions {
   display: flex;
-  align-items: center;
   gap: 1rem;
 }
 
-.dashboard-content {
+.page-content {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
 }
 
-.dashboard-stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.stat-card {
+.students-table-container {
   background: white;
-  padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  overflow: hidden;
 }
 
-.stat-number {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #667eea;
-  margin-bottom: 0.5rem;
+.students-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.stat-label {
-  color: #666;
-  font-size: 0.9rem;
+.students-table th,
+.students-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e9ecef;
 }
 
-.dashboard-actions {
+.students-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #495057;
+}
+
+.students-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.action-buttons {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.recent-students h2 {
-  margin-bottom: 1rem;
-  color: #333;
-}
-
-.students-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1rem;
-}
-
-.student-card {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: space-between;
-  align-items: start;
-}
-
-.student-info h3 {
-  margin: 0 0 0.5rem 0;
-  color: #333;
-  font-size: 1.1rem;
-}
-
-.student-details {
-  margin: 0.25rem 0;
-  color: #666;
-  font-size: 0.9rem;
-}
-
-.student-id {
-  margin: 0.25rem 0;
-  color: #999;
-  font-size: 0.8rem;
+  gap: 0.5rem;
 }
 
 .btn {
@@ -149,12 +110,44 @@
   color: white;
 }
 
+.btn-info {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.btn-info:hover {
+  background-color: #138496;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
 .btn-small {
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
 }
 
-.loading, .empty-state {
+.loading {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.empty-state {
   text-align: center;
   padding: 3rem;
   color: #666;
@@ -172,16 +165,24 @@
     text-align: center;
   }
   
-  .dashboard-content {
+  .header-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .page-content {
     padding: 1rem;
   }
   
-  .dashboard-actions {
-    flex-direction: column;
+  .students-table-container {
+    overflow-x: auto;
   }
   
-  .student-card {
+  .students-table {
+    min-width: 700px;
+  }
+  
+  .action-buttons {
     flex-direction: column;
-    gap: 1rem;
   }
 }
