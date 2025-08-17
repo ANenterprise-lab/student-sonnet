@@ -4,7 +4,7 @@
       <h1>Student Details</h1>
       <div class="header-actions">
         <a routerLink="/students" class="btn btn-outline">← Back to Students</a>
-        <a [routerLink]="['/students', student?.id, 'edit']" class="btn btn-secondary" *ngIf="student">Edit</a>
+        <a [routerLink]="['/students', student.id, 'edit']" class="btn btn-secondary" *ngIf="student">Edit</a>
         <button (click)="deleteStudent()" class="btn btn-danger" *ngIf="student">Delete</button>
       </div>
     </div>
